@@ -1,0 +1,16 @@
+ntp server 132.163.97.8
+ntp server 129.6.15.26
+ntp server 216.239.35.12
+
+clock summer-time PDT recurring
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+clock timezone PST -8
+end
+
+
+show ntp associations
+
+show clock
+
+

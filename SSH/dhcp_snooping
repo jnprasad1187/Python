@@ -1,0 +1,4 @@
+ip dhcp snooping vlan 101-125
+no ip dhcp snooping information option
+ip dhcp snooping
+
