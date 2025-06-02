@@ -1,0 +1,317 @@
+└─$ cat One_Python_All_Network_Devices.py 
+from netmiko import ConnectHandler
+
+ISP01 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.251',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+ISP02 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.252',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+R01 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.241',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+R02 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.242',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+CORE_SW01 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.243',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+CORE_SW02 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.244',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+ACCESS_SW01 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.245',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+ACCESS_SW02 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.246',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+ACCESS_SW03 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.86.247',
+    'username': 'cisco',
+    'password': 'cisco',
+}
+
+with open('ntp_servers') as f:
+    lines = f.read().splitlines()
+print (lines)
+
+all_devices = [ISP01, ISP02, R01, R02, CORE_SW01, CORE_SW02, ACCESS_SW01, ACCESS_SW02, ACCESS_SW03]
+
+for devices in all_devices:
+    net_connect = ConnectHandler(**devices)
+    output = net_connect.send_config_set(lines)
+    print (output)
+                                                                                                                                                                                            
+┌──(joseph㉿ubuntu-VirtualBox)-[~/Push_to_git_hub/SSH]
+└─$ python3 One_Python_All_Network_Devices.py 
+['ntp server 132.163.97.8', 'ntp server 129.6.15.26', 'ntp server 216.239.35.12', '', 'clock summer-time PDT recurring', 'service timestamps debug datetime msec localtime show-timezone', 'service timestamps log datetime msec localtime show-timezone', 'clock timezone PST -8', 'end', '', '', 'show ntp associations', '', 'show clock', '', '']
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ISP01(config)#ntp server 132.163.97.8
+ISP01(config)#ntp server 129.6.15.26
+ISP01(config)#ntp server 216.239.35.12
+ISP01(config)#
+ISP01(config)#clock summer-time PDT recurring
+ISP01(config)#service timestamps debug datetime msec localtime show-timezone
+ISP01(config)#service timestamps log datetime msec localtime show-timezone
+ISP01(config)#clock timezone PST -8
+ISP01(config)#end
+ISP01#
+ISP01#
+ISP01#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      0     64     1 45.111 14907.9 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 16000.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 16000.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+ISP01#
+ISP01#show clock
+*17:24:14.785 PDT Sun Jun 1 2025
+ISP01#
+ISP01#
+ISP01#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ISP02(config)#ntp server 132.163.97.8
+ISP02(config)#ntp server 129.6.15.26
+ISP02(config)#ntp server 216.239.35.12
+ISP02(config)#
+ISP02(config)#clock summer-time PDT recurring
+ISP02(config)#service timestamps debug datetime msec localtime show-timezone
+ISP02(config)#service timestamps log datetime msec localtime show-timezone
+ISP02(config)#clock timezone PST -8
+ISP02(config)#end
+ISP02#
+ISP02#
+ISP02#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      0     64     1 53.865 13502.9 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 16000.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 16000.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+ISP02#
+ISP02#show clock
+*17:24:17.909 PDT Sun Jun 1 2025
+ISP02#
+ISP02#
+ISP02#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+R01(config)#ntp server 132.163.97.8
+R01(config)#ntp server 129.6.15.26
+R01(config)#ntp server 216.239.35.12
+R01(config)#
+R01(config)#clock summer-time PDT recurring
+R01(config)#service timestamps debug datetime msec localtime show-timezone
+R01(config)#service timestamps log datetime msec localtime show-timezone
+R01(config)#clock timezone PST -8
+R01(config)#end
+R01#
+R01#
+R01#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      0     64     1 48.352 16710.4 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 16000.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 16000.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+R01#
+R01#show clock
+*17:24:16.229 PDT Sun Jun 1 2025
+R01#
+R01#
+R01#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+R02(config)#ntp server 132.163.97.8
+R02(config)#ntp server 129.6.15.26
+R02(config)#ntp server 216.239.35.12
+R02(config)#
+R02(config)#clock summer-time PDT recurring
+R02(config)#service timestamps debug datetime msec localtime show-timezone
+R02(config)#service timestamps log datetime msec localtime show-timezone
+R02(config)#clock timezone PST -8
+R02(config)#end
+R02#
+R02#
+R02#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      0     64     1 134.71 14023.8 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 16000.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 16000.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+R02#
+R02#show clock
+*17:24:20.536 PDT Sun Jun 1 2025
+R02#
+R02#
+R02#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+CORE-SW01(config)#ntp server 132.163.97.8
+CORE-SW01(config)#ntp server 129.6.15.26
+CORE-SW01(config)#ntp server 216.239.35.12
+CORE-SW01(config)#
+CORE-SW01(config)#clock summer-time PDT recurring
+CORE-SW01(config)#service timestamps debug datetime msec localtime show-timezone
+CORE-SW01(config)#service timestamps log datetime msec localtime show-timezone
+CORE-SW01(config)#clock timezone PST -8
+CORE-SW01(config)#end
+CORE-SW01#
+CORE-SW01#
+CORE-SW01#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      1     64     1 41.904 62933.3 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 15937.
+ ~216.239.35.12   .GOOG.           1      0     64     1 32.777 63056.1 7937.5
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+CORE-SW01#
+CORE-SW01#show clock
+*17:23:34.061 PDT Sun Jun 1 2025
+CORE-SW01#
+CORE-SW01#
+CORE-SW01#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+CORE-SW02(config)#ntp server 132.163.97.8
+CORE-SW02(config)#ntp server 129.6.15.26
+CORE-SW02(config)#ntp server 216.239.35.12
+CORE-SW02(config)#
+CORE-SW02(config)#clock summer-time PDT recurring
+CORE-SW02(config)#service timestamps debug datetime msec localtime show-timezone
+CORE-SW02(config)#service timestamps log datetime msec localtime show-timezone
+CORE-SW02(config)#clock timezone PST -8
+CORE-SW02(config)#end
+CORE-SW02#
+CORE-SW02#
+CORE-SW02#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      1     64     1 43.749 58321.0 7937.5
+ ~129.6.15.26     .NIST.           1      0     64     1 79.420 58411.5 7937.5
+ ~216.239.35.12   .GOOG.           1      0     64     1 38.233 58405.2 7937.5
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+CORE-SW02#
+CORE-SW02#show clock
+*17:23:41.130 PDT Sun Jun 1 2025
+CORE-SW02#
+CORE-SW02#
+CORE-SW02#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ACCESS-SW01(config)#ntp server 132.163.97.8
+ACCESS-SW01(config)#ntp server 129.6.15.26
+ACCESS-SW01(config)#ntp server 216.239.35.12
+ACCESS-SW01(config)#
+ACCESS-SW01(config)#clock summer-time PDT recurring
+ACCESS-SW01(config)#service timestamps debug datetime msec localtime show-timezone
+ACCESS-SW01(config)#service timestamps log datetime msec localtime show-timezone
+ACCESS-SW01(config)#clock timezone PST -8
+ACCESS-SW01(config)#end
+ACCESS-SW01#
+ACCESS-SW01#
+ACCESS-SW01#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      1     64     1 43.450 49295.8 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 15937.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 15937.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+ACCESS-SW01#
+ACCESS-SW01#show clock
+*17:23:52.284 PDT Sun Jun 1 2025
+ACCESS-SW01#
+ACCESS-SW01#
+ACCESS-SW01#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ACCESS-SW02(config)#ntp server 132.163.97.8
+ACCESS-SW02(config)#ntp server 129.6.15.26
+ACCESS-SW02(config)#ntp server 216.239.35.12
+ACCESS-SW02(config)#
+ACCESS-SW02(config)#clock summer-time PDT recurring
+ACCESS-SW02(config)#service timestamps debug datetime msec localtime show-timezone
+ACCESS-SW02(config)#service timestamps log datetime msec localtime show-timezone
+ACCESS-SW02(config)#clock timezone PST -8
+ACCESS-SW02(config)#end
+ACCESS-SW02#
+ACCESS-SW02#
+ACCESS-SW02#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      0     64     1 37.889 50543.6 7937.5
+ ~129.6.15.26     .INIT.          16      -     64     0  0.000   0.000 16000.
+ ~216.239.35.12   .INIT.          16      -     64     0  0.000   0.000 16000.
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+ACCESS-SW02#
+ACCESS-SW02#show clock
+*17:23:53.784 PDT Sun Jun 1 2025
+ACCESS-SW02#
+ACCESS-SW02#
+ACCESS-SW02#
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ACCESS-SW03(config)#ntp server 132.163.97.8
+ACCESS-SW03(config)#ntp server 129.6.15.26
+ACCESS-SW03(config)#ntp server 216.239.35.12
+ACCESS-SW03(config)#
+ACCESS-SW03(config)#clock summer-time PDT recurring
+ACCESS-SW03(config)#service timestamps debug datetime msec localtime show-timezone
+ACCESS-SW03(config)#service timestamps log datetime msec localtime show-timezone
+ACCESS-SW03(config)#clock timezone PST -8
+ACCESS-SW03(config)#end
+ACCESS-SW03#
+ACCESS-SW03#
+ACCESS-SW03#show ntp associations
+
+  address         ref clock       st   when   poll reach  delay  offset   disp
+ ~132.163.97.8    .NIST.           1      1     64     1 35.897 48645.7 7937.5
+ ~129.6.15.26     .NIST.           1      0     64     1 76.317 48819.7 7937.5
+ ~216.239.35.12   .GOOG.           1      0     64     1 30.266 48811.6 7937.5
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+ACCESS-SW03#
+ACCESS-SW03#show clock
+*17:23:58.283 PDT Sun Jun 1 2025
+ACCESS-SW03#
+ACCESS-SW03#
+ACCESS-SW03#
+                                                                                                                                                                                                                                                          
+┌──(joseph㉿ubuntu-VirtualBox)-[~/Push_to_git_hub/SSH]
+└─$ 
